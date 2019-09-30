@@ -1,0 +1,48 @@
+.main {
+  height: 100%;
+  color: #373a3c;
+
+  .header {
+    padding: 1em;
+    text-align: center;
+    margin: 1em 1em 0 1em;
+    background-color: #ffffff;
+  }
+
+  .content {
+    display: flex;
+
+    .menu, .chart {
+      background-color: #ffffff;
+      margin: 1em 1em 0 1em;
+      padding: 1em;
+    }
+
+    .menu {
+      flex: 20%;
+
+      select {
+        border: 1px solid buttonface;
+        width: 100%;
+        padding: .5em;
+      }
+    }
+
+    .chart {
+      flex: 80%;
+      margin-left: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    .content {
+      flex-direction: column;
+
+      .chart {
+        margin-left: 1em;
+      }
+    }
+  }
+}
