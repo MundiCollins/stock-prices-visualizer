@@ -14,8 +14,11 @@ export class AppComponent implements OnInit {
 
   company = 'HD'; // set Home Depot Inc. as default
   companies = [
-    {title: 'Home Depot Inc.', value: 'HD'}, {title: 'The Walt Disney Company', value: 'DIS'},
-    {title: 'Microsoft Corporation', value: 'MSFT'}, {title: 'The Boeing Company', value: 'BA'}];
+    { title: 'Home Depot Inc.', value: 'HD' }, { title: 'The Walt Disney Company', value: 'DIS' },
+    { title: 'Microsoft Corporation', value: 'MSFT' }, { title: 'The Boeing Company', value: 'BA' },
+    { title: '3M Company', value: 'MMM' }, { title: 'Pfizer Inc.', value: 'PFE' },
+    { title: 'Nike Inc.', value: 'NKE' }, { title: 'Johnson & Johnson', value: 'JNJ' },
+    { title: 'McDonald\'s Corporation', value: 'MCD' }, { title: 'Intel Corporation', value: 'INTC' }];
 
   static stringToDOM(str) {
     try {
