@@ -5,9 +5,8 @@
   <div class="content">
     <div class="menu">
       <p>Select company</p>
-      <select>
-        <option value="1">One</option>
-        <option value="2">Two</option>
+      <select [(ngModel)]="company"  (change) = "changeCompany()">
+        <option *ngFor = "let i of companies" [value]="i.value">{{i.title}}</option>
       </select>
     </div>
     <div class="chart">
