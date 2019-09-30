@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import {ChartDataService} from './chart-data.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,9 @@ import {environment} from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private chartData: ChartDataService) {
   }
 
-  data;
   company = 'HD'; // set Home Depot Inc. as default
   companies = [
     {title: 'Home Depot Inc.', value: 'HD'}, {title: 'The Walt Disney Company', value: 'DIS'},
@@ -30,10 +30,12 @@ export class AppComponent implements OnInit {
     &api_key=${environment.quandlApiKey}`;
     this.http.get(url, {responseType: 'text'}).subscribe(
       (data) => {
-        console.log('data', data);
         const dataDOM = AppComponent.stringToDOM(data);
         const dataJSON = AppComponent.JSONFromDOM(dataDOM);
-        console.log('data json', dataJSON);
+        if (dataJSON.dataset) {
+          this.chartData.labels = dataJSON.dataset.data.map(x => x[0]);
+          this.chartData.data = [{data: dataJSON.dataset.data.map(x => x[4])}];
+        }
       },
       (error) => console.log('error', error)
     );
