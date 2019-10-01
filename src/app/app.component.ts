@@ -13,12 +13,17 @@ export class AppComponent implements OnInit {
   }
 
   company = 'HD'; // set Home Depot Inc. as default
+  startDate = '2017-12-26';
+  endDate = '2017-12-28';
+  dateError = false;
   companies = [
-    { title: 'Home Depot Inc.', value: 'HD' }, { title: 'The Walt Disney Company', value: 'DIS' },
-    { title: 'Microsoft Corporation', value: 'MSFT' }, { title: 'The Boeing Company', value: 'BA' },
-    { title: '3M Company', value: 'MMM' }, { title: 'Pfizer Inc.', value: 'PFE' },
-    { title: 'Nike Inc.', value: 'NKE' }, { title: 'Johnson & Johnson', value: 'JNJ' },
-    { title: 'McDonald\'s Corporation', value: 'MCD' }, { title: 'Intel Corporation', value: 'INTC' }];
+    {title: 'Home Depot Inc.', value: 'HD'}, {title: 'The Walt Disney Company', value: 'DIS'},
+    {title: 'Microsoft Corporation', value: 'MSFT'}, {title: 'The Boeing Company', value: 'BA'},
+    {title: '3M Company', value: 'MMM'}, {title: 'Pfizer Inc.', value: 'PFE'},
+    {title: 'Nike Inc.', value: 'NKE'}, {title: 'Johnson & Johnson', value: 'JNJ'},
+    {title: 'McDonald\'s Corporation', value: 'MCD'}, {title: 'Intel Corporation', value: 'INTC'}];
+  minDate = '2017-12-26';
+  maxDate = '2017-12-28';
 
   static stringToDOM(str) {
     try {
@@ -47,8 +52,16 @@ export class AppComponent implements OnInit {
     this.getStockPrices();
   }
 
+  changeDate() {
+    this.dateError = this.startDate > this.endDate;
+    this.getStockPrices();
+  }
+
   getStockPrices() {
-    const url = `https://www.quandl.com/api/v3/datasets/EOD/${this.company}?start_date=2017-12-26&end_date=2017-12-28
+    if (this.dateError) {
+      return;
+    }
+    const url = `https://www.quandl.com/api/v3/datasets/EOD/${this.company}?start_date=${this.startDate}&end_date=${this.endDate}
     &api_key=${environment.quandlApiKey}`;
     this.http.get(url, {responseType: 'text'}).subscribe(
       (data) => {

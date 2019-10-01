@@ -5,9 +5,14 @@
   <div class="content">
     <div class="menu">
       <p>Select company</p>
-      <select [(ngModel)]="company"  (change) = "changeCompany()">
-        <option *ngFor = "let i of companies" [value]="i.value">{{i.title}}</option>
+      <select [(ngModel)]="company" (change)="changeCompany()">
+        <option *ngFor="let i of companies" [value]="i.value">{{i.title}}</option>
       </select>
+      <p *ngIf="dateError" class="error">*Start date should not be later than end date</p>
+      <p>Select start date</p>
+      <input type="date" [(ngModel)]="startDate" [min]="minDate" [max]="maxDate" (change)="changeDate()"/>
+      <p>Select end date</p>
+      <input type="date" [(ngModel)]="endDate" [min]="minDate" [max]="maxDate" (change)="changeDate()"/>
     </div>
     <div class="chart">
       <app-chart></app-chart>
