@@ -68,8 +68,14 @@ export class AppComponent implements OnInit {
         const dataDOM = AppComponent.stringToDOM(data);
         const dataJSON = AppComponent.JSONFromDOM(dataDOM);
         if (dataJSON.dataset) {
-          this.chartData.labels = dataJSON.dataset.data.map(x => x[0]);
-          this.chartData.data = [{data: dataJSON.dataset.data.map(x => x[4])}];
+          const labels = [];
+          const dataset = [{data: []}];
+          dataJSON.dataset.data.forEach((item) => {
+            labels.unshift(item[0]);
+            dataset[0].data.unshift(item[4]);
+          });
+          this.chartData.labels = labels;
+          this.chartData.data = dataset;
         }
       },
       (error) => console.log('error', error)
