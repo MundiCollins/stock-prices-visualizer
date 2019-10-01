@@ -1,31 +1,53 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
+import { ChartComponent } from './chart/chart.component';
+import { ChartDataService } from './chart-data.service';
 
 describe('AppComponent', () => {
+  let comp: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        ChartComponent
       ],
+      imports: [
+        HttpClientModule,
+        FormsModule
+      ],
+      providers: [ChartDataService]
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    comp    = fixture.componentInstance;
 
-  it(`should have as title 'stock-prices-visualizer'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('stock-prices-visualizer');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('stock-prices-visualizer app is running!');
+  });
+
+  it('should create the app', () => {
+    expect(fixture).toBeDefined();
+    expect(comp).toBeDefined();
+  });
+
+  it(`should load initial data`, () => {
+    expect(comp.company).toEqual('HD');
+    expect(comp.startDate).toEqual('2017-12-26');
+    expect(comp.endDate).toEqual('2017-12-28');
+    expect(comp.dateError).toEqual(false);
+    expect(comp.minDate).toEqual('2017-12-26');
+    expect(comp.maxDate).toEqual('2017-12-28');
+    expect(comp.companies).toEqual([
+      {title: 'Home Depot Inc.', value: 'HD'}, {title: 'The Walt Disney Company', value: 'DIS'},
+      {title: 'Microsoft Corporation', value: 'MSFT'}, {title: 'The Boeing Company', value: 'BA'},
+      {title: '3M Company', value: 'MMM'}, {title: 'Pfizer Inc.', value: 'PFE'},
+      {title: 'Nike Inc.', value: 'NKE'}, {title: 'Johnson & Johnson', value: 'JNJ'},
+      {title: 'McDonald\'s Corporation', value: 'MCD'}, {title: 'Intel Corporation', value: 'INTC'}]);
   });
 });
