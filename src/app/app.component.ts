@@ -13,8 +13,10 @@ export class AppComponent implements OnInit {
   }
 
   company = 'HD'; // set Home Depot Inc. as default
-  startDate = '2017-12-26';
-  endDate = '2017-12-28';
+  startDate = '2016-12-26';
+  endDate = '2018-12-28';
+  minDate = '2016-12-26';
+  maxDate = '2018-12-28';
   dateError = false;
   companies = [
     {title: 'Home Depot Inc.', value: 'HD'}, {title: 'The Walt Disney Company', value: 'DIS'},
@@ -22,8 +24,6 @@ export class AppComponent implements OnInit {
     {title: '3M Company', value: 'MMM'}, {title: 'Pfizer Inc.', value: 'PFE'},
     {title: 'Nike Inc.', value: 'NKE'}, {title: 'Johnson & Johnson', value: 'JNJ'},
     {title: 'McDonald\'s Corporation', value: 'MCD'}, {title: 'Intel Corporation', value: 'INTC'}];
-  minDate = '2017-12-26';
-  maxDate = '2017-12-28';
 
   static stringToDOM(str) {
     try {
