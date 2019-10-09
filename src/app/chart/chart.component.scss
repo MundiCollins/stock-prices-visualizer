@@ -1,0 +1,17 @@
+.loader {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 550px;
+  background: black;
+  opacity: 0.8;
+  color: white;
+
+  p {
+    vertical-align:middle;
+    text-align:center;
+    line-height: 550px;
+  }
+}

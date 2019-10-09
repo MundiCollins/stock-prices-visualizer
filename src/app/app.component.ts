@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   minDate = '2016-12-26';
   maxDate = '2018-12-28';
   dateError = false;
+  loading = false;
   companies = [
     {title: 'Home Depot Inc.', value: 'HD'}, {title: 'The Walt Disney Company', value: 'DIS'},
     {title: 'Microsoft Corporation', value: 'MSFT'}, {title: 'The Boeing Company', value: 'BA'},
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
     }
     const url = `https://www.quandl.com/api/v3/datasets/EOD/${this.company}?start_date=${this.startDate}&end_date=${this.endDate}
     &api_key=${environment.quandlApiKey}`;
+    this.loading = true;
     this.chartData.getData(url, 'text').subscribe((event) => {
       if (event.type === HttpEventType.Response) {
         const data = event.body;
@@ -77,6 +79,7 @@ export class AppComponent implements OnInit {
           });
           this.chartData.labels = labels;
           this.chartData.data = dataset;
+          this.loading = false;
         }
       }
     });

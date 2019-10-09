@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataService } from '../chart-data.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { ChartDataService } from '../chart-data.service';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
-
+  @Input() loading: boolean;
   constructor(private chartData: ChartDataService) {
   }
 
